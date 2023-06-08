@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Sentiment Analysis Results</h1>
+    <h2>Sentiment Score: {{sentiment_result}}</h2>
+    <h2>Positive Count: {{positive_count}}</h2>
+    <h2>Negative Count: {{negative_count}}</h2>
+    <h2>Webpage Used: {{url}}</h2>
+    <button onclick="goBack()">Back</button>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
