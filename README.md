@@ -5,6 +5,11 @@ Movie Sentiment Analyzer is a web application that utilizes machine learning to 
 reviews. The app scrapes movie reviews from IMDb and uses a Support Vector Machine (SVM) model to predict the sentiment 
 of the reviews. It provides valuable insights into the sentiments expressed by viewers towards a particular movie.
 
+## Sentiment Analysis Application
+
+This repository contains a sentiment analysis application that analyzes movie reviews. The application is deployed on Heroku and can be accessed at: [https://flaskml.herokuapp.com/](https://flaskml.herokuapp.com/).
+
+
 ## Features
 * Scrapes movie reviews from IMDb using Beautiful Soup.
 * Performs data cleaning and preprocessing on the reviews.
