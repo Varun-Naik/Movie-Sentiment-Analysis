@@ -8,11 +8,12 @@ import re
 import nltk
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, SoupStrainer
 # Importing libraries
 from flask import Flask, render_template, request
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from urllib.parse import quote
 
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -22,6 +23,31 @@ nltk.download('omw-1.4')
 # Defining stop_words and lemmatizer
 stop_words = set(stopwords.words("english"))
 lemmatizer = WordNetLemmatizer()
+
+
+# Function to get reviews url from the movie name
+def movie_name_to_reviews_url(movie_name):
+    search_query = quote(movie_name)
+    search_url = f"https://www.imdb.com/find?q={search_query}"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+    }
+
+    search_response = requests.get(search_url, headers=headers)
+    search_soup = BeautifulSoup(search_response.content, "html.parser")
+    a_tag = search_soup.find('a', class_='ipc-metadata-list-summary-item__t')
+
+    movie_link = "https://www.imdb.com" + a_tag['href']
+    movie_response = requests.get(movie_link, headers=headers)
+    movie_soup = BeautifulSoup(movie_response.content, 'html.parser')
+    reviews_section = movie_soup.find('section', {'cel_widget_id': 'StaticFeature_UserReviews'})
+    if reviews_section:
+        link_element = reviews_section.find('a', href=True)
+        if link_element:
+            reviews_url = "https://www.imdb.com" + link_element['href']
+            return reviews_url
+
+    return None
 
 
 # Removing the html strips
@@ -58,7 +84,6 @@ with open(model_pkl, 'rb') as file:
 # svm_from_joblib = joblib.load(model_path)
 
 
-
 application = app = Flask(__name__)
 
 
@@ -70,10 +95,23 @@ def home():
 @app.route('/analyze', methods=['POST'])
 def analyze():
     try:
-        url = request.form['url']
+        print(request.form)
 
-        # Perform web scraping using BeautifulSoup
+        # URL from the form
+        # url = request.form['url']
+        # print(f"url: {url}")
+
+        # Manual URL for testing
+        # url = 'https://www.imdb.com/title/tt9764362/reviews?ref_=tt_urv'
+
+        # URL from Movie name
+        movie_name = request.form['mname']
+        print(f"movie name  : {movie_name}")
+        url = movie_name_to_reviews_url(movie_name)
+        print(f"url: {url}")
+
         webpage = requests.get(url)
+        # Perform web scraping using BeautifulSoup
         soup = BeautifulSoup(webpage.content, "html.parser")
 
         # Get the review data using its class
@@ -103,6 +141,7 @@ def analyze():
         # Calculate the mean sentiment value from the predictions
         return render_template('result.html', sentiment_result=average_sentiment_score, positive_count=positive_count,
                                negative_count=negative_count, url=url)
+
     except Exception as e:
         # Log the exception for debugging purposes
         print(f"Exception occurred: {str(e)}")

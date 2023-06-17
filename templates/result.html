@@ -1,17 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Sentiment Analysis Results</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
+    <link rel="manifest" href="/static/icons/site.webmanifest">
+
+    <title>Analysis Results - Movie Sentiment Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Add your custom styles here */
+        /* body {
+            background-color: #f2f2f2;
+        } */
+
+        
+        /* Add more styles as needed */
+    </style>
 </head>
 <body>
-    <h1>Sentiment Analysis Results</h1>
-    <h2>Sentiment Score: {{sentiment_result}}</h2>
-    <h2>Positive Count: {{positive_count}}</h2>
-    <h2>Negative Count: {{negative_count}}</h2>
-    <h2>Webpage Used: {{url}}</h2>
-    <button onclick="goBack()">Back</button>
+    <nav>
+        <a href="#" class="logo">
+          <h1>
+            <span class="msa">Sentiment Analysis</span>
+            <span class="fist">👩‍💻</span>
+          </h1>
+        </a>
+    <!-- </nav> -->
+
+      <ul>
+      <li class="nav-item">
+        <a href="#about" class="nav-link" id="nav-link">About</a>
+      </li>
+      <li class="nav-item">
+        <a href="#features" class="nav-link" id="nav-link">Features</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tools" class="nav-link" id="nav-link"
+          >Tools</a>
+      </li>
+      <li class="nav-item">
+        <a href="#main-interface" class="nav-link" id="nav-link">Try it out</a>
+      </li>
+      </ul>
+    </nav>
+
+    <div class="results">
+        <h1>Sentiment Analysis Results</h1>
+        <div class="result">
+            <h2>Sentiment Score: {{sentiment_result}}</h2>
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{sentiment_result * 100}}%"></div>
+            </div>
+            <h2>Positive Count: {{positive_count}}</h2>
+            <h2>Negative Count: {{negative_count}}</h2>
+            <h2>URL: <a href="{{url}}">{{url}}</a></h2>
+        </div>
+        <button onclick="goBack()" class="back-button">Back</button>
+    </div>
+
+    <footer>
+        Movie Sentiment Analyzer - Unlock the Power of Movie Reviews <br>
+        © 2023 Movie Sentiment Analyzer <br>
+        All rights reserved.
+    </footer>
+
     <script>
         function goBack() {
             window.history.back();

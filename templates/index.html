@@ -1,15 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Review Sentiment Analysis</title>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
+    <link rel="manifest" href="/static/icons/site.webmanifest">
+
+
+    <title>Movie Sentiment Analyzer</title>
 </head>
 <body>
-    <h1>Review Sentiment Analysis</h1>
-    <form action="{{ url_for('analyze') }}" method="POST">
-        <label for="url">Enter URL:</label>
-        <input type="text" id="url" name="url" required>
-        <input type="submit" value="Analyze">
-    </form>
+    <nav>
+        <a href="#" class="logo">
+          <h1>
+            <span class="msa">Sentiment Analysis</span>
+            <span class="fist">👩‍💻</span>
+          </h1>
+        </a>
+    <!-- </nav> -->
+
+      <ul>
+      <li class="nav-item">
+        <a href="#about" class="nav-link" id="nav-link">About</a>
+      </li>
+      <li class="nav-item">
+        <a href="#features" class="nav-link" id="nav-link">Features</a>
+      </li>
+      <li class="nav-item">
+        <a href="#tools" class="nav-link" id="nav-link"
+          >Tools</a>
+      </li>
+      <li class="nav-item">
+        <a href="#main-interface" class="nav-link" id="nav-link">Try it out</a>
+      </li>
+      </ul>
+    </nav>
+
+    <div class="hamburger" id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+
+    <section class="hero">
+        <div class="landing">
+            <div class="intro">
+                <h1>
+                    <span class="welcome">Welcome to <br />  </span>
+                    <span class="movie">Movie Sentiment Analyzer </span>                          
+                </h1>
+                <p>Introducing the ultimate tool for analyzing movie reviews from IMDb using Machine Learning.</p>
+                <a href="#main-interface" class="btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+
+
+     <section class="about" id="about">
+      <h3>About this project</h3>
+      <p>
+        Movie Sentiment Analyzer is a powerful tool designed to analyze movie reviews from IMDb using advanced
+          Machine Learning techniques. It provides a comprehensive understanding of the sentiments expressed by
+          viewers towards a particular movie. Whether you are a movie enthusiast, a critic, or a filmmaker,
+          our tool can assist you in gaining valuable insights into audience opinions and perceptions.
+      </p>
+
+    </section>
+
+    <div id="main-interface">
+      <div class="analyzer">
+          <h2>Find the sentiment of movie reviews</h2>
+          <form action="{{ url_for('analyze') }}" method="POST">
+{#              <label for="url-name">Enter the url of your favorite Movie:</label>
+              <input type="text" id="url" name="url" required>#}
+              <label for="movie-name">Enter the name of your favorite Movie:</label>
+              <input type="text" id="mname" name="mname" required>
+              <input type="submit" value="Analyze">
+          </form>
+      </div>
+    </div>
+
+
+    <footer>
+        Movie Sentiment Analyzer - Unlock the Power of Movie Reviews <br>
+        © 2023 Movie Sentiment Analyzer <br>
+        All rights reserved.
+    </footer>
 </body>
 </html>
