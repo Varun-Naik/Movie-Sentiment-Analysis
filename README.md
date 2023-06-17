@@ -17,6 +17,25 @@ This repository contains a sentiment analysis application that analyzes movie re
 * Calculates the average sentiment score, positive count, and negative count.
 * Provides a user-friendly web interface to input movie names and analyze reviews.
 
+## Model Training
+
+The sentiment analysis model was trained using the IMDB dataset, which contains movie reviews labeled with positive or negative sentiment. The training process involved several steps, as outlined below.
+
+1. Data Preprocessing:
+   - The IMDB dataset was imported and the sentiment labels were converted to binary values, with 'positive' mapped to 1 and 'negative' mapped to 0.
+   - Text cleaning techniques were applied to the reviews, including removing HTML tags, non-alphanumeric characters, and converting the text to lowercase.
+   - Lemmatization was performed to reduce words to their base form, and stop words were removed.
+
+2. Deploying SVM Model:
+   - The scikit-learn library was utilized to implement a Support Vector Machine (SVM) model.
+   - The dataset was split into training and testing sets using an 80:20 ratio.
+   - The text data was transformed into numerical features using the Bag-of-Words (BoW) method with the CountVectorizer class.
+   - An SVM model was instantiated and trained on the preprocessed training data.
+   - Classification was performed on the testing data, and predictions were obtained.
+
+Please note that the specific code details and the dataset itself are not included in this repository. However, the outlined steps provide a summary of the model training process and the techniques used for sentiment analysis.
+
+
 
 ## Prerequisites
 * Python 3.7 or higher 
@@ -153,5 +172,11 @@ This project is licensed under the MIT License.
 ## Acknowledgments
 * The SVM model used for sentiment analysis is trained on IMDb movie reviews data.
 * The web scraping is done using Beautiful Soup library.
+
+## References
+
+- [Sentiment Analysis on an IMDB Movie Review Dataset with a Support Vector Machines Model in Python](https://towardsdatascience.com/sentiment-analysis-on-a-imdb-movie-review-dataset-with-a-support-vector-machines-model-in-python-50c1d487327e) 
+
+
 
 
