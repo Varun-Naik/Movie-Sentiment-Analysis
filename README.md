@@ -17,7 +17,17 @@ This repository contains a sentiment analysis application that analyzes movie re
 * Calculates the average sentiment score, positive count, and negative count.
 * Provides a user-friendly web interface to input movie names and analyze reviews.
 
-## Model Training
+
+
+## Technologies Used
+* Python
+* Flask
+* BeautifulSoup
+* scikit-learn
+* Docker
+* Heroku
+
+## Model Development
 
 The sentiment analysis model was trained using the IMDB dataset, which contains movie reviews labeled with positive or negative sentiment. The training process involved several steps, as outlined below.
 
@@ -35,116 +45,22 @@ The sentiment analysis model was trained using the IMDB dataset, which contains 
 
 Please note that the specific code details and the dataset itself are not included in this repository. However, the outlined steps provide a summary of the model training process and the techniques used for sentiment analysis.
 
+## Flask App/Web Interface
+This Flask app is deployed on a Heroku Server and also tested on AWS Elastic Beanstalk successfully. However currently 
+only Heroku server is live. This was done by containerizing the app using Docker for easier deployment.
+
+The Flask app does the following tasks:
+1. Does the webscraping from the IMDb reviews page
+2. Performs the sentiment analysis using the saved model trained earlier
+3. Shows the results to the user with other metrics
 
 
-## Prerequisites
-* Python 3.7 or higher 
-* Flask
-* pandas
-* requests
-* nltk
-* BeautifulSoup
-* scikit-learn
+## Code Structure
+* `app.py`: This is the main Flask application file that handles routing, HTTP requests, and connects different components
+of the application.
+* `imdb_model.pkl`: This file represents the pre-trained SVM model used for sentiment analysis. 
+* `imdb_vect.pkl`: This file represents the saved CountVectorizer object for transforming text data.
 
-
-## Local Deployment
-
-To run the Flask app locally, follow these steps:
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/Varun-Naik/Movie-Sentiment-Analysis.git
-   cd Movie-Sentiment-Analysis
-   ```
-   
-2. Install the dependencies:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-   
-3. Run the Flask app:
-
-    ```bash
-    python app.py
-    ```
-
-4. Open a web browser and visit http://localhost:5000 to access the application.
-
-
-
-## Docker Deployment
-
-To deploy the Flask app using Docker, follow these steps:
-
-1. Install Docker on your machine.
-
-2. Build the Docker image:
-
-    ``` bash
-    docker build --tag flask-sentiment .
-    ```
-
-3. Run the Docker container:
-
-    ```bash
-    docker run -d -p 5000:5000 flask-sentiment
-    ```
-
-4. Open a web browser and visit http://localhost:5000 to access the application.
-
-5. Rename the image according to the Docker hub repository
-
-    ```
-    docker tag flask-sentiment:latest varunnaik29/flaskai:v2.0
-    ```
-
-
-
-6. Push the image to Docker Hub
-    ``` bash
-    docker push varunnaik29/flaskai:v2.0
-    ```
-
-
-
-## Heroku Deployment
-
-To deploy the Flask app on Heroku, follow these steps:
-
-1. Create a Heroku account if you don't have one.
-
-2. Install the Heroku CLI and log in to your Heroku account:
-
-    ```
-    heroku login
-    ```
-3. Log in to the container registry:
-    ```
-    heroku container:login
-    ```
-
-4. Create a new Heroku app:
-
-    ```bash
-    heroku create flaskml
-    ```
-
-5. Push the Docker image to your app:
-    ```
-    heroku container:push web --app flaskml
-    ```
-
-6. Release the app to deploy it:
-    ```
-    heroku container:release web --app flasksentiment
-    ```
-
-7. Open a web browser and visit https://flaskml.herokuapp.com/ in this case to access the application or use CLI:
-    ```
-    heroku open -a flaskml
-    ```
 
 
 ## Output Example
